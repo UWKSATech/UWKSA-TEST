@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve members.uwksa.ca
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/projects/members.uwksa.ca
+Environment="PATH=/home/ubuntu/projects/members.uwksa.ca/.venv/bin"
+ExecStart=/home/ubuntu/projects/members.uwksa.ca/.venv/bin/gunicorn --workers 8 --bind unix:myproject.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
